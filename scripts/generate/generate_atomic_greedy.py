@@ -17,7 +17,7 @@ from src.data.utils import TextEncoder
 from src.train.opt import OpenAIAdam
 
 import src.models.utils as model_utils
-from tqdm import tqdm
+from auto_tqdm import tqdm
 import torch.nn.functional as F
 import numpy as np
 

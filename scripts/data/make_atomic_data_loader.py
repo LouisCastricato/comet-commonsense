@@ -8,7 +8,7 @@ from utils.utils import DD
 import utils.utils as utils
 import random
 from src.data.utils import TextEncoder
-from tqdm import tqdm
+from auto_tqdm import tqdm
 import torch
 
 # Manually change the set of categories you don't want to include

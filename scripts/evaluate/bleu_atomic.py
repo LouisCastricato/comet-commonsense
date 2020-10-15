@@ -6,7 +6,7 @@ sys.path.append(os.getcwd())
 
 from nltk import bleu
 from nltk.translate.bleu_score import SmoothingFunction
-from tqdm import tqdm
+from auto_tqdm import tqdm
 
 import pandas
 import json

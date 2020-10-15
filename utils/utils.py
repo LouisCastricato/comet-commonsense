@@ -8,7 +8,7 @@ import contextlib
 
 from distutils.dir_util import mkpath
 
-from tqdm import tqdm
+from auto_tqdm import tqdm
 
 
 def make_new_tensor_from_list(items, device_num, dtype=torch.float32):

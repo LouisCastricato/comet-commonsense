@@ -8,7 +8,7 @@ import random
 import math
 import torch
 
-from tqdm import tqdm
+from auto_tqdm import tqdm
 
 
 def map_name(name):

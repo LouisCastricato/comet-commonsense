@@ -4,7 +4,7 @@ import src.data.config as cfg
 
 import torch
 import random
-from tqdm import tqdm
+from auto_tqdm import tqdm
 
 
 def map_name(name, opt):

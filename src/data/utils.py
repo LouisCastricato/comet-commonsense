@@ -4,7 +4,7 @@ import json
 import spacy
 import torch
 
-from tqdm import tqdm
+from auto_tqdm import tqdm
 
 
 def load_existing_data_loader(data_loader, path):
