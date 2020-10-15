@@ -100,7 +100,41 @@ class GenerationDataLoader(DataLoader):
                 self.opt.data, self.data["train"]["total"])
 
         return False
+    def make_tensors_reverse(self, text_encoder, special,
+                     splits=["train", "dev", "test"], test=False):
+        self.vocab_encoder = text_encoder.encoder
+        self.vocab_decoder = text_encoder.decoder
+        self.special_chars = special
 
+        sequences = {}
+        for split in splits:
+            sequences[split] = get_generation_sequences(
+                self.opt, self.data, split, text_encoder, test)
+
+            self.masks[split]["total"] = [(len(i[0]), len(i[1])) for
+                                          i in sequences[split]]
+
+        self.max_event = max([max([l[0] for l in self.masks[split]["total"]])
+                              for split in self.masks])
+        self.max_effect = max([max([l[1] for l in self.masks[split]["total"]])
+                               for split in self.masks])
+
+        print(self.max_event)
+        print(self.max_effect)
+
+        for split in splits:
+            num_elements = len(sequences[split])
+            self.sequences[split]["total"] = torch.LongTensor(
+                num_elements, self.max_event + self.max_effect).fill_(0)
+
+            for i, seq in enumerate(sequences[split]):
+                # print(self.sequences[split]["total"][i, :len(seq[0])].size())
+                # print(torch.FloatTensor(seq[0]).size())
+                self.sequences[split]["total"][i, :len(seq[0])] = \
+                    torch.LongTensor(seq[0])
+                self.sequences[split]["total"][i, self.max_event:self.max_event + len(seq[1])] = \
+                    torch.LongTensor(seq[1])
+        
     def make_tensors(self, text_encoder, special,
                      splits=["train", "dev", "test"], test=False):
         self.vocab_encoder = text_encoder.encoder

@@ -43,9 +43,10 @@ class Evaluator(object):
         start_time = time.time()
 
         # Initialize progress bar
+        '''
         bar = utils.set_progress_bar(
             data_loader.total_size[split])
-
+        '''
         reset = False
 
         with torch.no_grad():
@@ -60,11 +61,6 @@ class Evaluator(object):
                 end = data_loader.offset_summary(split)
 
                 reset = outputs["reset"]
-
-                if not reset:
-                    bar.update(end - start)
-                else:
-                    print(end)
 
                 if cfg.toy and self.counter(nums) > 100:
                     break
